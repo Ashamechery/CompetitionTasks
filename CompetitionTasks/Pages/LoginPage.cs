@@ -19,8 +19,7 @@ namespace CompetitionTasks.Pages
         {
 
 
-            // open chrome browser
-            driver.Manage().Window.Maximize();
+            
             //launch turnup  portal
             driver.Navigate().GoToUrl("http://localhost:5000/");
 

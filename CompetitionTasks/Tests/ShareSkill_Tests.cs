@@ -2,12 +2,11 @@
 using CompetitionTasks.Utilities;
 using NUnit.Framework;
 using System;
-using ExcelDataReader;
 using OpenQA.Selenium;
 using System.IO;
 using System.Data;
 using System.Diagnostics;
-using CompetitionTasks.ExcelDataReader;
+
 
 namespace CompetitionTasks.Pages
 {
@@ -20,12 +19,8 @@ namespace CompetitionTasks.Pages
         {
             try
             {
-                string fileName = @"C:\Users\anoop\Desktop\CompetitionTrial\CompetitionTrial\ExcelDataReader\TestData.xlsx";
-                FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
+                ExcelOperations.ClearData();
 
-                ExcelOperations.ReadDataTable(stream, "LoginSheet");
-                Console.WriteLine("***************************");
-                ExcelOperations.ReadDataTable(stream, "ShareSkill");
             }
             catch (Exception e)
             {
@@ -37,6 +32,7 @@ namespace CompetitionTasks.Pages
         [Test, Order(2)]
         public void CreateShareSkillDetails_Test()
         {
+            ExcelOperations.ReadDataTable(stream, "ShareSkill");
             test = extent.CreateTest("test1").Info("Test started");
 
             //Profile create page object initialization and definition

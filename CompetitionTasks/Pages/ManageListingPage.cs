@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CompetitionTasks.Utilities;
 using OpenQA.Selenium;
 using System.IO;
+using NUnit.Framework;
 
 namespace CompetitionTasks.Pages
 {
@@ -92,7 +93,8 @@ namespace CompetitionTasks.Pages
             saveButton.Click();
             
             ScreenShot.takeScreenshot(driver);
-
+            IWebElement editCheck = driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/thead/tr/th[5]"));
+            Assert.That(editCheck.Text == "Service Type", "not edited successfully");
 
         }
         //deleting
@@ -106,7 +108,8 @@ namespace CompetitionTasks.Pages
             IWebElement popupConfirmButton = driver.FindElement(By.XPath("/html/body/div[2]/div/div[3]/button[2]"));
             popupConfirmButton.Click();
 
-
+            IWebElement deleteCheck = driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/thead/tr/th[5]"));
+            Assert.That(deleteCheck.Text == "Service Type", " deleted successfully");
         }
 
     }
