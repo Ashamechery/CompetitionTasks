@@ -30,6 +30,53 @@ namespace CompetitionTasks.Pages
 
 
         [Test, Order(2)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void CreateShareSkillDetails_Test()
         {
             ExcelOperations.ReadDataTable(stream, "ShareSkill");
@@ -45,15 +92,18 @@ namespace CompetitionTasks.Pages
 
         }
         [Test, Order(3)]
-        public void bEditSkillDetails_Test()
+        public void EditSkillDetails_Test()
         {
+            ExcelOperations.ReadDataTable(stream, "ManageListing");
             test = extent.CreateTest("test2").Info("Test started");
             //edit
             ManageListingPage manageListingPageObj = new ManageListingPage();
+
             manageListingPageObj.EditingSteps(driver);
             test.Log(Status.Info, "shareskill details edited");
             test.Log(Status.Pass, "Test passed");
-
+           
+            Assert.That(editCheck.Text == "Service Type", " not created successfully");
 
         }
         [Test, Order(4)]
@@ -65,6 +115,8 @@ namespace CompetitionTasks.Pages
             test.Log(Status.Info, "shareskill details deleted");
             test.Log(Status.Pass, "Test passed");
             //takeScreenshot(driver);
+            IWebElement editCheck = driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/thead/tr/th[5]"));
+            Assert.That(editCheck.Text == "Service Type", " not created successfully");
         }
 
 

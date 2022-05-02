@@ -30,15 +30,21 @@ namespace CompetitionTasks.Pages
             {
                 //Identify user name text box and enter valid user name
                 IWebElement usernameTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[1]/input"));
-                usernameTextbox.SendKeys("ashamechery11@gmail.com");
-
+                usernameTextbox.Clear();    
+               
+                string userName = ExcelOperations.ReadData(1, "UserName");
+                usernameTextbox.SendKeys(userName);
+              
                 //identify password and enter valid password
                 IWebElement passwordTextbox = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[2]/input"));
-                passwordTextbox.SendKeys("123456");
+                usernameTextbox.Clear();
+                string password = ExcelOperations.ReadData(1, "Password");
+                passwordTextbox.SendKeys(password);
                 Wait.WaitToBeClickable(driver, "XPath", "/html/body/div[2]/div/ div/div[1]/div/div[4]/button", 2);
                 //click on login button
                 IWebElement loginButton = driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[4]/button"));
                 loginButton.Click();
+                Thread.Sleep(3000); 
 
             }
             catch (Exception ex)

@@ -96,7 +96,7 @@ namespace CompetitionTasks.Pages
             //option 2
             AutoItX3 autoIt = new AutoItX3();
             autoIt.WinActivate("Open");
-            autoIt.Send(@"C: \Users\anoop\Desktop\CompetitionTasks\CompetitionTasks"); Thread.Sleep(1000);
+            autoIt.Send(@"E:\AutomationTesting_26f08f8b-0668-4786-8f89-956e40e5e55e.pdf"); Thread.Sleep(1000);
 
             autoIt.Send(@"{Enter}");
 
@@ -109,8 +109,7 @@ namespace CompetitionTasks.Pages
             saveButton.Click();
             Thread.Sleep(3000);
             ScreenShot.takeScreenshot(driver);
-            IWebElement editCheck = driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/thead/tr/th[5]"));
-            Assert.That(editCheck.Text == "Service Type", " not created successfully");
+           
 
         }
     }

@@ -15,31 +15,34 @@ namespace CompetitionTasks.Pages
     {
 
         public void EditingSteps(IWebDriver driver)
-
         {
-
+            Thread.Sleep(5000);
+            IWebElement manageListingIcon = driver.FindElement(By.XPath("//*[@id='service-detail-section']/section[1]/div/a[3]"));
+            manageListingIcon.Click();
             //Editing
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
             IWebElement edit = driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr[1]/td[8]/div/button[2]/i"));
             edit.Click();
-
-
+            
             //Wait.WaitToBeClickable(driver, "XPath", "//*[@id='account-profile-section']/div/section[1]/div/div[2]/a", 3);
-
 
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input", 3);
             //Editing Title
             IWebElement titleTextBox = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input"));
             titleTextBox.Clear();
-            titleTextBox.SendKeys("Developer");
+            string title = ExcelOperations.ReadData(1, "Title");
+            titleTextBox.SendKeys(title);
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[2]/div/div[2]/div[1]/textarea", 3);
             //Editing description
             IWebElement descriptionTextBox = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[2]/div/div[2]/div[1]/textarea"));
             descriptionTextBox.Clear();
-            descriptionTextBox.SendKeys("I am expertised in java");
+            string description = ExcelOperations.ReadData(1, "Description");
+            descriptionTextBox.SendKeys(description);
+         
             //editing category
             IWebElement categoryDropdown = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div/select"));
             categoryDropdown.Click();
+          
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select/option[2]", 3);
             IWebElement graphicCategory = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select/option[2]"));
             graphicCategory.Click();
@@ -54,7 +57,8 @@ namespace CompetitionTasks.Pages
 
             IWebElement tags = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[4]/div[2]/div/div/div/div/input"));
             tags.Clear();
-            tags.SendKeys("c#development and javascript");
+            string tagName = ExcelOperations.ReadData(1, "Tags");
+            tags.SendKeys(tagName);
             tags.SendKeys(Keys.Enter);
 
             //Editing servicetype as oneoff service
@@ -81,7 +85,8 @@ namespace CompetitionTasks.Pages
             skillTradeRadioButton.Click();
             IWebElement skillExchange = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[8]/div[4]/div[1]/div/div/div/div/input"));
             skillExchange.Clear();
-            skillExchange.SendKeys("javascript");
+            string skillTrade = ExcelOperations.ReadData(1, "Skill Exchange");
+            skillExchange.SendKeys(skillTrade);
             skillExchange.SendKeys(Keys.Enter);
 
             //Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[10]/div[2]/div/div[2]/div/input", 3);
@@ -91,10 +96,10 @@ namespace CompetitionTasks.Pages
 
             IWebElement saveButton = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[11]/div/input[1]"));
             saveButton.Click();
-            
             ScreenShot.takeScreenshot(driver);
             IWebElement editCheck = driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/thead/tr/th[5]"));
-            Assert.That(editCheck.Text == "Service Type", "not edited successfully");
+            Assert.That(editCheck.Text == "Service Type", " not created successfully");
+
 
         }
         //deleting
