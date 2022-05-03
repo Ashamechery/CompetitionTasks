@@ -12,6 +12,7 @@ using System.Threading;
 using System.IO;
 using ExcelDataReader;
 using NUnit.Framework;
+using OpenQA.Selenium.Support.UI;
 
 namespace CompetitionTasks.Pages
 {
@@ -22,7 +23,7 @@ namespace CompetitionTasks.Pages
 
             //click on shareskill
             //Wait.WaitToBeClickable(driver, "XPath", "//*[@id='account-profile-section']/div/section[1]/div/div[2]/a", 3);
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             IWebElement shareSkill = driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[1]/div/div[2]/a"));
             
             shareSkill.Click();
@@ -43,17 +44,20 @@ namespace CompetitionTasks.Pages
             //adding category
             IWebElement categoryDropdown = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div/select"));
             categoryDropdown.Click();
-            string categoryRead = ExcelOperations.ReadData(1, "Category");
+            SelectElement categoryselect = new SelectElement(categoryDropdown);
+            categoryselect.SelectByText(ExcelOperations.ReadData(1, "Category"));
+
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select/option[2]", 3);
-            IWebElement graphicCategory = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select/option[2]"));
-            graphicCategory.Click();
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select", 3);
+           // IWebElement graphicCategory = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select/option[2]"));
+           // graphicCategory.Click();
+          //  Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select", 3);
             //adding subcategory
             IWebElement subcategory = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select"));
             subcategory.Click();
-            string subcategoryRead = ExcelOperations.ReadData(1, "Subcategory");
-            IWebElement logoCategory = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select/option[2]"));
-            logoCategory.Click();
+            SelectElement subcategoryRead = new SelectElement(subcategory);
+            subcategoryRead.SelectByText(ExcelOperations.ReadData(1, "Subcategory"));
+            //IWebElement logoCategory = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select/option[2]"));
+            //logoCategory.Click();
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[4]/div[2]/div/div/div/div/input", 3);
 
             IWebElement tags = driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[4]/div[2]/div/div/div/div/input"));
